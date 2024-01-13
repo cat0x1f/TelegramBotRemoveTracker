@@ -46,8 +46,13 @@ def clean_bilibili(message_text):
         message_text = re.findall(r"https://\S+", message_text)[-1]
         target_url = requests.get(message_text, allow_redirects=False).text
         return re.search(r'<a href="(.*?)\?', target_url).group(1)
-    elif "https://bilibili.com" in message_text:
+    elif (
+        "https://bilibili.com" in message_text
+        or "https://www.bilibili.com" in message_text
+    ):
         return message_text.split("?")[0]
+    elif "?" not in message_text:
+        return message_text
 
 
 bot.infinity_polling()
