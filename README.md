@@ -22,13 +22,13 @@ python3 main.py yourtoken
 ### 拉取
 
 ```bash
-docker pull ghcr.io/cat0x1f/telegrambotremovetracker:latest
+docker pull ghcr.io/cat0x1f/telegrambotremovetracker:main
 ```
 
 ### Docker 运行
 
 ```bash
-docker run --env BOTTOKEN=yourtoken ghcr.io/cat0x1f/telegrambotremovetracker:latest
+docker run --env BOTTOKEN=yourtoken ghcr.io/cat0x1f/telegrambotremovetracker:main
 ```
 
 其中的 `yourtoken` 为从 @BotFather 获取的令牌。
