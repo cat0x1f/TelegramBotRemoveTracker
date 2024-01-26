@@ -1,7 +1,6 @@
 # 使用 python3 main.py yourtoken 来启动，比如 python3 main.py 114514:ABCDEFGO_HIJKLMNOxE
 import telebot
 import sys
-from urllib.parse import urlparse
 import re
 import requests
 
@@ -27,21 +26,15 @@ def receive_url(message):
 
 
 def clean_twitter(message_text):
-    """
-    从`https://x.com/elonmusk/status/1744554956667904127?s=61`
-    清理成`https://fxtwitter.com/elonmusk/status/1744554956667904127`"""
+    first_question_mark_index = message_text.find("?")
+    if first_question_mark_index != -1:
+        input_str = input_str[:first_question_mark_index]
+    cleaned_link = input_str.replace("x.com", "fxtwitter.com")
 
-    parsed_url = urlparse(message_text)
-    cleaned_domain = "fxtwitter.com"
-    status_id_path = parsed_url.path
-    cleaned_link = f"https://{cleaned_domain}{status_id_path}"
     return cleaned_link
 
 
 def clean_bilibili(message_text):
-    """从`https://b23.tv/cKGneGN`
-    清理成`https://www.bilibili.com/video/BV1Hp4y1V7Wu/`"""
-
     if "https://b23.tv" in message_text:
         message_text = re.findall(r"https://\S+", message_text)[-1]
         target_url = requests.get(message_text, allow_redirects=False).text
