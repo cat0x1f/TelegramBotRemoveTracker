@@ -34,7 +34,8 @@ def clean_twitter(message_text):
         if first_question_mark_index != -1:
             message_text = message_text[:first_question_mark_index]
 
-    cleaned_link = message_text.replace("x.com", "fxtwitter.com")
+    cleaned_link = message_text.replace("https://x.com", "https://fxtwitter.com")
+    cleaned_link = cleaned_link.replace("https://twitter.com", "https://fxtwitter.com")
 
     return cleaned_link
 
